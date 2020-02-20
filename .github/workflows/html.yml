@@ -21,6 +21,9 @@ jobs:
       run: |
         gem install bundler
         bundle install --jobs 4 --retry 3
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Check unrolled code is up to date
       run: |
         bundle exec rake code
