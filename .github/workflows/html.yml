@@ -26,8 +26,8 @@ jobs:
     - name: Check unrolled code is up to date
       run: |
         bundle exec rake code
-        if [ -z "$(git status --porcelain)" ]; then 
-          # Working directory clean
+        if [ -z "$(git status --porcelain)" ]; then
+          echo "Unrolled code is in sync with code branches"
         else 
           >&2 echo "One or more code branches are not in sync with unrolled commits."
           git status
