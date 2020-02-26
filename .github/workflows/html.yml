@@ -29,10 +29,7 @@ jobs:
         for branch in $(git branch --all | grep '^\s*remotes' | grep -e 'chapter-\d\d-code'); do
           git branch --track "${branch##*/}" "$branch"
         done
-    - name: test git setup
-      run: |
         git branch -al
-        cat .git/config
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
       with:
