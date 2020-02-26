@@ -27,7 +27,7 @@ jobs:
       run: |
         git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
         for branch in $(git branch --all | grep '^\s*remotes' | grep -e 'chapter-\d\d-code'); do
-          git branch --track "${branch##*/}" "$branch"
+          git checkout -b "${branch##*/}" --track "$branch"
         done
         git branch -al
     - name: Set up Ruby 2.6
