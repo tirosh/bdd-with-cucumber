@@ -24,7 +24,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: Fetch all branches
-    - run: |
+      run: |
         git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
     - name: test git setup
       run: |
