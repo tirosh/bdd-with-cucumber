@@ -32,6 +32,7 @@ namespace :code do
               puts "#{branch.red} \t- Branch exists. Preparing to unroll commits..."
               dir = "#{chapter.dir}/code/#{lang}"
               `mkdir -p #{dir}`
+              `git fetch origin #{branch}`
               `git reset --hard origin/#{branch}`
               `git branch -D #{branch}`
               `git checkout -b #{branch} &> /dev/null`
