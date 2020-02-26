@@ -25,6 +25,8 @@ namespace :code do
             branch = chapter.code_branch(lang)
             cmd = "git ls-remote --exit-code origin #{branch} > /dev/null"
             unless system(cmd)
+              puts "$ git ls-remote origin #{branch}"
+              puts `git ls-remote origin #{branch}`
               puts "#{branch.red} \t- No branch exists. Skipping."
             else
               puts "#{branch.red} \t- Branch exists. Preparing to unroll commits..."
