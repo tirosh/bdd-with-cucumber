@@ -26,7 +26,7 @@ jobs:
     - name: Fetch and checkout all branches (for checking code branch sync)
       run: |
         git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
-        for branch in $(git branch --all | grep '^\s*remotes' | grep -e 'chapter-\d\d-code')$'); do
+        for branch in $(git branch --all | grep '^\s*remotes' | grep -e 'chapter-\d\d-code'); do
           git branch --track "${branch##*/}" "$branch"
         done
     - name: test git setup
