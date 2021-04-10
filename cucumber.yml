@@ -1,1 +1,1 @@
-default: --quiet --tags @smoke
+default: --quiet --tags @SHOUTY-11
