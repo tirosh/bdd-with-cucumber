@@ -1,1 +1,1 @@
-default: --quiet --tags @SHOUTY-11
+default: --quiet --tags "not @slow"
