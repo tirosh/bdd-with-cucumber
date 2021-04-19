@@ -1,1 +1,1 @@
-default: --quiet --order random
+default: --order random
