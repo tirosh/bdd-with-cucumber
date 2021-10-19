@@ -1,5 +1,3 @@
-require 'shouty'
-
 DEFAULT_RANGE = 100
 
 Before do
