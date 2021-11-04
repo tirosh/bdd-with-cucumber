@@ -1,4 +1,5 @@
 const assert = require('assert')
+const { assertThat, equalTo } = require('hamjest')
 const sinon = require('sinon')
 const {Person} = require('../src/shouty')
 
@@ -41,6 +42,6 @@ describe('Person', () => {
 
   it('can be moved to a different location', () => {
     const lucy = new Person('Lucy', network, 0).at(100)
-    assert.equal(lucy.location, 100)
+    assertThat(lucy.location, equalTo(100))
   })
 })

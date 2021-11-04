@@ -20,78 +20,66 @@ Given('{person} is located at {int}', function (person, distance) {
   this.people[person.name] = person.at(distance)
 })
 
-Given("Sean has bought {int} credits", function (credits) {
-  this.people["Sean"].credits = credits
+Given("{person} has bought {int} credits", function (sean, credits) {
+  sean.credits = credits
 })
 
-When("Sean shouts", function () {
-  this.people["Sean"].shout("Hello, world")
+When("{person} shouts", function (shouter) {
+  shouter.shout("Hello, world")
 })
 
 When(
-  "Sean shouts {int} messages containing the word {string}",
-  function (count, word) {
+  "{person} shouts {int} messages containing the word {string}",
+  function (shouter, count, word) {
     for (let i = 0; i < count; i++) {
       const message = `A message containing the word ${word}`
-      this.people["Sean"].shout(message)
-      if (!this.messagesShoutedBy["Sean"]) this.messagesShoutedBy["Sean"] = []
-      this.messagesShoutedBy["Sean"].push(message)
+      shouter.shout(message)
+      if (!this.messagesShoutedBy[shouter.name]) this.messagesShoutedBy[shouter.name] = []
+      this.messagesShoutedBy[shouter.name].push(message)
     }
   }
 )
 
-When("Sean shouts a message", function () {
-  const message = "A message from Sean"
-  this.people["Sean"].shout(message)
-  if (!this.messagesShoutedBy["Sean"]) this.messagesShoutedBy["Sean"] = []
-  this.messagesShoutedBy["Sean"].push(message)
+When("{person} shouts a message", function (shouter) {
+  const message = `A message from ${shouter.name}`
+  shouter.shout(message)
+  if (!this.messagesShoutedBy[shouter.name]) this.messagesShoutedBy[shouter.name] = []
+  this.messagesShoutedBy[shouter.name].push(message)
 })
 
-When("Sean shouts a long message", function () {
-  const message = ["A message from Sean", "that spans multiple lines"].join(
+When("{person} shouts a long message", function (shouter) {
+  const message = [`A message from ${shouter.name}`, "that spans multiple lines"].join(
     "\n"
   )
-  this.people["Sean"].shout(message)
-  if (!this.messagesShoutedBy["Sean"]) this.messagesShoutedBy["Sean"] = []
-  this.messagesShoutedBy["Sean"].push(message)
+  shouter.shout(message)
+  if (!this.messagesShoutedBy[shouter.name]) this.messagesShoutedBy[shouter.name] = []
+  this.messagesShoutedBy[shouter.name].push(message)
 })
 
-When("Sean shouts {int} over-long messages", function (count) {
+When("{person} shouts {int} over-long messages", function (shouter, count) {
   for (let i = 0; i < count; i++) {
-    const baseMessage = "A message from Sean that is 181 characters long "
+    const baseMessage = `A message from ${shouter.name} that is 181 characters long `
     const message = baseMessage + "x".repeat(181 - baseMessage.length)
-    this.people["Sean"].shout(message)
-    if (!this.messagesShoutedBy["Sean"]) this.messagesShoutedBy["Sean"] = []
-    this.messagesShoutedBy["Sean"].push(message)
+    shouter.shout(message)
+    if (!this.messagesShoutedBy[shouter.name]) this.messagesShoutedBy[shouter.name] = []
+    this.messagesShoutedBy[shouter.name].push(message)
   }
 })
 
-When("Sean shouts {string}", function (message) {
-  this.people["Sean"].shout(message)
-  if (!this.messagesShoutedBy["Sean"]) this.messagesShoutedBy["Sean"] = []
-  this.messagesShoutedBy["Sean"].push(message)
+When("{person} shouts {string}", function (shouter, message) {
+  shouter.shout(message)
+  if (!this.messagesShoutedBy[shouter.name]) this.messagesShoutedBy[shouter.name] = []
+  this.messagesShoutedBy[shouter.name].push(message)
 })
 
-When("Sean shouts the following message", function (message) {
-  this.people["Sean"].shout(message)
-  if (!this.messagesShoutedBy["Sean"]) this.messagesShoutedBy["Sean"] = []
-  this.messagesShoutedBy["Sean"].push(message)
-})
-
-Then("Lucy should hear Sean's message", function () {
-  assertThat(this.messagesShoutedBy["Sean"].length, is(1))
-  const message = this.messagesShoutedBy["Sean"][0]
-  assertThat(this.people["Lucy"].messagesHeard(), contains(message))
+When("{person} shouts the following message", function (shouter, message) {
+  shouter.shout(message)
+  if (!this.messagesShoutedBy[shouter.name]) this.messagesShoutedBy[shouter.name] = []
+  this.messagesShoutedBy[shouter.name].push(message)
 })
 
 Then("Lucy should hear a shout", function () {
   assertThat(this.people["Lucy"].messagesHeard().length, is(1))
-})
-
-Then("Larry should not hear Sean's message", function () {
-  assertThat(this.messagesShoutedBy["Sean"].length, is(1))
-  const message = this.messagesShoutedBy["Sean"][0]
-  assertThat(this.people["Larry"].messagesHeard(), not(contains(message)))
 })
 
 Then("{word} should not hear a shout", function (name) {
@@ -106,10 +94,10 @@ Then("Lucy hears the following messages:", function (expectedMessages) {
   assert.deepEqual(actualMessages, expectedMessages.raw())
 })
 
-Then("Lucy hears all Sean's messages", function () {
+Then("Lucy hears all {person}'s messages", function (shouter) {
   assert.deepEqual(
     this.people["Lucy"].messagesHeard(),
-    this.messagesShoutedBy["Sean"]
+    this.messagesShoutedBy[shouter.name]
   )
 })
 
