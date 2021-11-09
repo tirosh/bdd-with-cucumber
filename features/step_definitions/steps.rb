@@ -17,8 +17,8 @@ Given "a person named {word}" do |name|
 end
 
 Given "people are located at" do |table|
-  table.transpose.symbolic_hashes.each do |name: , location: |
-    @people[name] = Shouty::Person.new(@network, location.to_i)
+  table.transpose.symbolic_hashes.each do |row|
+    @people[row[:name]] = Shouty::Person.new(@network, row[:location].to_i)
   end
 end
 
