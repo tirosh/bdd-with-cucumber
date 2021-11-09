@@ -12,10 +12,6 @@ Given "the range is {int}" do |range|
   @network = Shouty::Network.new(range)
 end
 
-Given "a person named {person}" do |person|
-  @people[person.name] = person
-end
-
 Given "{person} is located at {int}" do |person, location|
   @people[person.name] = person.move_to(location)
 end
@@ -39,18 +35,6 @@ When 'Sean shouts the following message' do |message|
   @messages_shouted_by["Sean"] << message
 end
 
-When "Sean shouts a message" do
-  message = "A message from Sean"
-  @people["Sean"].shout(message)
-  @messages_shouted_by["Sean"] << message
-end
-
-When "Sean shouts a long message" do
-  message = ["A message from Sean", "that spans multiple lines"].join("\n")
-  @people["Sean"].shout(message)
-  @messages_shouted_by["Sean"] << message
-end
-
 When "Sean shouts {int} over-long messages" do |count|
   count.times do
     base_message = "A message from Sean that is 181 characters long "
@@ -68,16 +52,8 @@ When 'Sean shouts {int} messages containing the word {string}' do |count, word|
   end
 end
 
-Then "Lucy should hear Sean's message" do
-  expect(@people['Lucy'].messages_heard).to eq [@messages_shouted_by["Sean"][0]]
-end
-
 Then "Lucy should hear a shout" do
   expect(@people['Lucy'].messages_heard.count).to eq 1
-end
-
-Then "Larry should not hear Sean's message" do
-  expect(@people['Larry'].messages_heard).not_to include(@messages_shouted_by["Sean"][0])
 end
 
 Then "{word} should not hear a shout" do |name|
