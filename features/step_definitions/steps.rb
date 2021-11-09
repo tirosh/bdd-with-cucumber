@@ -12,13 +12,13 @@ Given "the range is {int}" do |range|
   @network = Shouty::Network.new(range)
 end
 
-Given "a person named {word}" do |name|
-  @people[name] = Shouty::Person.new(@network, 0)
+Given "a person named {person}" do |person|
+  @people[person.name] = person
 end
 
 Given "people are located at" do |table|
   table.transpose.symbolic_hashes.each do |row|
-    @people[row[:name]] = Shouty::Person.new(@network, row[:location].to_i)
+    @people[row[:name]] = Shouty::Person.new(row[:name], @network, row[:location].to_i)
   end
 end
 
