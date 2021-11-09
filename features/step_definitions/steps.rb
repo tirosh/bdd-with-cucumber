@@ -13,7 +13,7 @@ Given "the range is {int}" do |range|
 end
 
 Given "{person} is located at {int}" do |person, location|
-  @people[person.name] = person.move_to(location)
+  person.move_to(location)
 end
 
 Given('Sean has bought {int} credits') do |credits|
