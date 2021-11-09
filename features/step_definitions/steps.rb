@@ -16,10 +16,8 @@ Given "a person named {person}" do |person|
   @people[person.name] = person
 end
 
-Given "people are located at" do |table|
-  table.transpose.symbolic_hashes.each do |row|
-    @people[row[:name]] = Shouty::Person.new(row[:name], @network, row[:location].to_i)
-  end
+Given "{person} is located at {int}" do |person, location|
+  @people[person.name] = person.move_to(location)
 end
 
 Given('Sean has bought {int} credits') do |credits|

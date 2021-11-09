@@ -39,4 +39,11 @@ RSpec.describe Shouty::Network do
     expect(lucy.messages_heard).to eq([message])
   end
 
+  it "moves to a new location" do
+    sean = Shouty::Person.new("Sean", @networkStub, 0)
+
+    sean.move_to(100)
+
+    expect(sean.location).to eql(100)
+  end
 end

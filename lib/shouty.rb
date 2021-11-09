@@ -20,6 +20,11 @@ module Shouty
     def hear(message)
       @messages_heard << message
     end
+
+    def move_to(new_location)
+      @location = new_location
+      self
+    end
   end
 
   class Network
