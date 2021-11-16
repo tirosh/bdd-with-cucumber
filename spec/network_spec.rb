@@ -45,16 +45,15 @@ RSpec.describe Shouty::Network do
 
   context "credits" do
     it "deducts 2 credits for a shout over 180 characters" do
-    long_message = 'x' * 181
+      long_message = 'x' * 181
 
-    sean  = Shouty::Person.new("Sean", network, 0)
-    laura = Shouty::Person.new("Laura", network, 10)
+      sean  = Shouty::Person.new("Sean", network, 0)
+      laura = Shouty::Person.new("Laura", network, 10)
 
-    network.subscribe(laura)
-    network.broadcast(long_message, sean)
+      network.subscribe(laura)
+      network.broadcast(long_message, sean)
 
-    expect(sean.credits).to eq(-2)
-
+      expect(sean.credits).to eq(-2)
     end
   end
 end
