@@ -21,6 +21,7 @@ Feature: Hear shout
   Rule: Listener should be able to hear multiple shouts
 
     Scenario: Two shouts
+      Given the range is 100
       And Sean is located at 0
       And Lucy is located at 50
       When Sean shouts "Free bagels!"
@@ -32,6 +33,7 @@ Feature: Hear shout
   Rule:  Maximum length of message is 180 characters
 
     Scenario: Message is too long
+      Given the range is 100
       And Sean is located at 0
       And Lucy is located at 50
       When Sean shouts the following message
