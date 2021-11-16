@@ -7,7 +7,6 @@ const { Person, Network } = require("../../src/shouty")
 const default_range = 100
 
 Before(function () {
-  this.people = {}
   this.messagesShoutedBy = {}
   this.network = new Network(default_range)
 })
@@ -17,7 +16,7 @@ Given("the range is {int}", function (range) {
 })
 
 Given('{person} is located at {int}', function (person, location) {
-  this.people[person.name] = person.moveTo(location)
+  person.moveTo(location)
 })
 
 Given("{person} has bought {int} credits", function (sean, credits) {

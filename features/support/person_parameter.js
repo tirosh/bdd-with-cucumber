@@ -6,7 +6,7 @@ defineParameterType({
   name: 'person',
   regexp: /Lucy|Sean|Larry/,
   transformer: function(name) { 
-    if (!this.people[name]) this.people[name] = new Person(name, this.network, 0)
-    return this.people[name]
+    this.people = this.people || {}
+    return this.people[name] = this.people[name] || new Person(name, this.network, 0)
 	}
 })
