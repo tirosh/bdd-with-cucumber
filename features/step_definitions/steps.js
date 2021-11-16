@@ -2,7 +2,7 @@ const { Given, When, Then, Before } = require("@cucumber/cucumber")
 const { assertThat, contains, is, not, containsInAnyOrder } = require("hamjest")
 const assert = require("assert")
 
-const { Person, Network } = require("../../src/shouty")
+const { Network } = require("../../src/shouty")
 
 const default_range = 100
 
@@ -61,29 +61,29 @@ When("{person} shouts the following message", function (shouter, message) {
   this.messagesShoutedBy[shouter.name].push(message)
 })
 
-Then("Lucy should hear a shout", function () {
-  assertThat(this.people["Lucy"].messagesHeard().length, is(1))
+Then("{person} should hear a shout", function (listener) {
+  assertThat(listener.messagesHeard().length, is(1))
 })
 
-Then("{word} should not hear a shout", function (name) {
-  assertThat(this.people[name].messagesHeard().length, is(0))
+Then("{person} should not hear a shout", function (listener) {
+  assertThat(listener.messagesHeard().length, is(0))
 })
 
-Then("Lucy hears the following messages:", function (expectedMessages) {
-  let actualMessages = this.people["Lucy"]
+Then("{person} hears the following messages:", function (listener, expectedMessages) {
+  let actualMessages = listener
     .messagesHeard()
     .map((message) => [message])
 
   assert.deepEqual(actualMessages, expectedMessages.raw())
 })
 
-Then("Lucy hears all {person}'s messages", function (shouter) {
+Then("{person} hears all {person}'s messages", function (listener, shouter) {
   assert.deepEqual(
-    this.people["Lucy"].messagesHeard(),
+    listener.messagesHeard(),
     this.messagesShoutedBy[shouter.name]
   )
 })
 
-Then("Sean should have {int} credits", function (expectedCredits) {
-  assertThat(this.people["Sean"].credits, is(expectedCredits))
+Then("{person} should have {int} credits", function (person, expectedCredits) {
+  assertThat(person.credits, is(expectedCredits))
 })
