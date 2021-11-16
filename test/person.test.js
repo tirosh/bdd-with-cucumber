@@ -41,7 +41,8 @@ describe('Person', () => {
   })
 
   it('can be moved to a different location', () => {
-    const lucy = new Person('Lucy', network, 0).at(100)
+    const lucy = new Person('Lucy', network, 0)
+    lucy.moveTo(100)
     assertThat(lucy.location, equalTo(100))
   })
 })

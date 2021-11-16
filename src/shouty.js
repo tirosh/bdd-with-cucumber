@@ -9,8 +9,9 @@ class Person {
     this.network.subscribe(this)
   }
 
-  at(location) {
-    return new Person(this.name, this.network, location)
+  moveTo(location) {
+    this.location = location
+    return this
   }
 
   shout(message) {

@@ -16,8 +16,8 @@ Given("the range is {int}", function (range) {
   this.network = new Network(range)
 })
 
-Given('{person} is located at {int}', function (person, distance) {
-  this.people[person.name] = person.at(distance)
+Given('{person} is located at {int}', function (person, location) {
+  this.people[person.name] = person.moveTo(location)
 })
 
 Given("{person} has bought {int} credits", function (sean, credits) {
