@@ -40,22 +40,6 @@ When(
   }
 )
 
-When("{person} shouts a message", function (shouter) {
-  const message = `A message from ${shouter.name}`
-  shouter.shout(message)
-  if (!this.messagesShoutedBy[shouter.name]) this.messagesShoutedBy[shouter.name] = []
-  this.messagesShoutedBy[shouter.name].push(message)
-})
-
-When("{person} shouts a long message", function (shouter) {
-  const message = [`A message from ${shouter.name}`, "that spans multiple lines"].join(
-    "\n"
-  )
-  shouter.shout(message)
-  if (!this.messagesShoutedBy[shouter.name]) this.messagesShoutedBy[shouter.name] = []
-  this.messagesShoutedBy[shouter.name].push(message)
-})
-
 When("{person} shouts {int} over-long messages", function (shouter, count) {
   for (let i = 0; i < count; i++) {
     const baseMessage = `A message from ${shouter.name} that is 181 characters long `
